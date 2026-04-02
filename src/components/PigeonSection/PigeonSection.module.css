@@ -1,37 +1,222 @@
+/* ── Keyframes ─────────────────────────────────────────── */
+
+@keyframes escapeGlitch {
+  0%, 88%, 100% {
+    text-shadow:
+      0 0 12px rgba(232, 197, 58, 0.9),
+      0 0 40px rgba(232, 197, 58, 0.4);
+    transform: none;
+  }
+  89% {
+    text-shadow: 5px 0 14px #ff00ff, -5px 0 14px #00ffff;
+    transform: skewX(-6deg);
+  }
+  90% {
+    text-shadow: -4px 0 10px #ff00ff, 4px 0 10px #00ffff;
+    transform: skewX(4deg);
+  }
+  91% {
+    text-shadow:
+      0 0 12px rgba(232, 197, 58, 0.9),
+      0 0 40px rgba(232, 197, 58, 0.4);
+    transform: none;
+  }
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Targeting brackets slide in from outside */
+@keyframes bracketInTL {
+  from { opacity: 0; transform: translate(-6px, -6px); }
+  to   { opacity: 1; transform: translate(0, 0); }
+}
+@keyframes bracketInTR {
+  from { opacity: 0; transform: translate(6px, -6px); }
+  to   { opacity: 1; transform: translate(0, 0); }
+}
+@keyframes bracketInBL {
+  from { opacity: 0; transform: translate(-6px, 6px); }
+  to   { opacity: 1; transform: translate(0, 0); }
+}
+@keyframes bracketInBR {
+  from { opacity: 0; transform: translate(6px, 6px); }
+  to   { opacity: 1; transform: translate(0, 0); }
+}
+
+/* Laser fires */
+@keyframes laserFire {
+  0%   { opacity: 0; transform: scaleX(0); transform-origin: left; }
+  10%  { opacity: 1; transform: scaleX(1); transform-origin: left; }
+  80%  { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1); }
+}
+
+@keyframes laserSweep {
+  0%   { background-position: -60% 0; }
+  100% { background-position: 160% 0; }
+}
+
+/* Robot hit ring — expands outward when laser lands */
+@keyframes ringPulse {
+  0%   { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; }
+  70%  { transform: translate(-50%, -50%) scale(1.25); opacity: 0.15; }
+  100% { transform: translate(-50%, -50%) scale(1.35); opacity: 0; }
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+
 .section {
   position: relative;
   padding: 8rem 3rem 6rem;
   min-height: 70vh;
   display: flex;
   align-items: center;
-  overflow: visible;
+  overflow: hidden;
 }
 
-.text {
-  font-size: clamp(1.2rem, 3.5vw, 2.8rem);
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  max-width: 60%;
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
   position: relative;
   z-index: 2;
-  color: var(--gold);
-  text-shadow: 0 0 10px rgba(232, 197, 58, 0.6);
-  filter:
-    drop-shadow(0 0 3px var(--gold))
-    drop-shadow(0 0 8px rgba(232, 197, 58, 0.3));
-  transition:
-    filter 0.4s ease,
-    text-shadow 0.4s ease;
+  max-width: 55%;
 }
 
-.text:hover {
-  text-shadow:
-    0 0 10px rgba(232, 197, 58, 0.6);
-  filter:
-    drop-shadow(0 0 5px var(--gold))
-    drop-shadow(0 0 16px rgba(232, 197, 58, 0.45))
-    drop-shadow(0 0 25px rgba(232, 197, 58, 0.15));
+.line {
+  overflow: visible;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+.line:nth-child(1) { animation-delay: 0.1s; }
+.line:nth-child(2) { animation-delay: 0.25s; }
+.line:nth-child(3) { animation-delay: 0.4s; }
+.line:nth-child(4) { animation-delay: 0.55s; }
+
+/* ── Text styles ────────────────────────────────────────── */
+
+.filled {
+  font-size: clamp(1.6rem, 4.5vw, 3.8rem);
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(232, 197, 58, 0.5);
+}
+
+.dim {
+  font-size: clamp(0.65rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.12em;
+  color: rgba(232, 197, 58, 0.45);
+}
+
+.escape {
+  font-size: clamp(2.2rem, 6.5vw, 5.5rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--gold);
+  display: inline-block;
+  animation: escapeGlitch 7s ease-in-out infinite 2s;
+}
+
+.outline {
+  font-size: clamp(1.4rem, 3.8vw, 3.2rem);
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--gold);
+}
+
+/* ── Targeting reticle ──────────────────────────────────── */
+
+.targetBox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4em 0.5em;
+  line-height: 1;
+}
+
+/* Shared bracket style */
+.bracketTL,
+.bracketTR,
+.bracketBL,
+.bracketBR {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+}
+
+.bracketTL {
+  top: -2px; left: -2px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  animation: bracketInTL 0.3s ease-out forwards 1.4s;
+}
+.bracketTR {
+  top: -2px; right: -2px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  animation: bracketInTR 0.3s ease-out forwards 1.4s;
+}
+.bracketBL {
+  bottom: -2px; left: -2px;
+  border-bottom: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  animation: bracketInBL 0.3s ease-out forwards 1.4s;
+}
+.bracketBR {
+  bottom: -2px; right: -2px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  animation: bracketInBR 0.3s ease-out forwards 1.4s;
+}
+
+/* ── Laser beam ─────────────────────────────────────────── */
+
+.laser {
+  position: absolute;
+  /* vertically aligned with ESCAPE — roughly 52% down the section */
+  top: 52%;
+  left: calc(55% - 1rem);
+  right: calc(10% + clamp(280px, 38vw, 500px) * 0.5);
+  height: 2px;
+  z-index: 3;
+  opacity: 0;
+  animation: laserFire 1.2s ease-out forwards 1.8s;
+}
+
+.laserCore {
+  width: 100%;
+  height: 100%;
+  /* dim base beam */
+  background-color: rgba(232, 197, 58, 0.25);
+  box-shadow: 0 0 6px 1px rgba(232, 197, 58, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* travelling hotspot via pseudo-element */
+.laserCore::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(232, 197, 58, 0.5) 30%,
+    #fff 50%,
+    rgba(232, 197, 58, 0.5) 70%,
+    transparent 100%
+  );
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  animation: laserSweep 0.7s linear infinite 2s;
+}
+
+/* ── Robot ──────────────────────────────────────────────── */
 
 .robot {
   position: absolute;
@@ -43,4 +228,20 @@
   z-index: 1;
   opacity: 0.85;
   mix-blend-mode: screen;
+}
+
+/* Expanding ring when laser hits */
+.robotRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 197, 58, 0.6);
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  animation: ringPulse 0.8s ease-out forwards 3s;
+  pointer-events: none;
+  z-index: 0;
 }

@@ -15,13 +15,14 @@ export default async function handler(req, res) {
     body: JSON.stringify({
       service_id:  process.env.EMAILJS_SERVICE_ID,
       template_id: process.env.EMAILJS_TEMPLATE_ID,
-      publicKey:   process.env.EMAILJS_PUBLIC_KEY,
+      user_id:     process.env.EMAILJS_PUBLIC_KEY,
       template_params: { from_name, from_email, message },
     }),
   })
 
   if (!response.ok) {
-    return res.status(500).json({ error: 'Failed to send email' })
+    const text = await response.text()
+    return res.status(500).json({ error: 'Failed to send email', detail: text })
   }
 
   return res.status(200).json({ ok: true })

@@ -10,7 +10,7 @@ export default function Hero() {
           <span
             key={word}
             className={styles.word}
-            style={{ animationDelay: `${0.2 + i * 0.25}s` }}
+            style={{ animationDelay: `${0.2 + i * 0.3}s` }}
           >
             {word}
           </span>

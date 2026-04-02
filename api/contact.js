@@ -9,6 +9,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing fields' })
   }
 
+  if (from_name.length > 100 || from_email.length > 200 || message.length > 2000) {
+    return res.status(400).json({ error: 'Input too long' })
+  }
+
   const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -22,8 +26,7 @@ export default async function handler(req, res) {
   })
 
   if (!response.ok) {
-    const text = await response.text()
-    return res.status(500).json({ error: 'Failed to send email', detail: text })
+    return res.status(500).json({ error: 'Failed to send email' })
   }
 
   return res.status(200).json({ ok: true })

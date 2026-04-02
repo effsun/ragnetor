@@ -118,7 +118,7 @@
   line-height: 1;
   color: var(--gold);
   display: inline-block;
-  animation: escapeGlitch 7s ease-in-out infinite 2s;
+  animation: escapeGlitch 3s ease-in-out infinite 3s;
 }
 
 .outline {

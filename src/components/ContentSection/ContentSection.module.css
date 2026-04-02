@@ -1,0 +1,82 @@
+.section {
+  padding: 0 0 5rem;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  padding: 0 3rem;
+  font-family: var(--font);
+}
+
+.sectionLabel::before {
+  content: '←';
+  font-size: 1rem;
+}
+
+.sectionLabel::after {
+  content: '';
+  width: 200px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.card {
+  margin: 0 3rem;
+  background: #f0f0f0;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 0 40px var(--gold-glow), inset 0 0 40px rgba(232, 197, 58, 0.05);
+}
+
+.nestedBoxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  height: 220px;
+  background: var(--card1);
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.card:hover .nestedBoxes {
+  transform: scale(1.02);
+}
+
+.nestedBoxes::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  background: var(--card2);
+}
+
+.nestedBoxes::after {
+  content: '';
+  position: absolute;
+  inset: 45px;
+  background: var(--card3);
+}
+
+.cardLabel {
+  position: relative;
+  z-index: 10;
+  font-family: var(--font);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-shadow: 0 0 20px var(--gold);
+}

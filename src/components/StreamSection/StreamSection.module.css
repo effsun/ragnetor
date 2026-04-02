@@ -1,0 +1,76 @@
+.section {
+  padding: 0 0 5rem;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  padding: 0 3rem;
+  font-family: var(--font);
+}
+
+.sectionLabel::before {
+  content: '←';
+  font-size: 1rem;
+}
+
+.sectionLabel::after {
+  content: '';
+  width: 200px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff0000;
+  box-shadow: 0 0 8px #ff0000;
+  animation: livePulse 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #ff0000; }
+  50%       { opacity: 0.5; box-shadow: 0 0 16px #ff0000; }
+}
+
+.playerArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3rem;
+}
+
+.playerWrap {
+  transition: width 0.05s linear;
+  border: 1px solid rgba(232, 197, 58, 0.3);
+  box-shadow: 0 0 40px rgba(232, 197, 58, 0.08);
+  overflow: hidden;
+}
+
+/* 16:9 aspect ratio box */
+.aspectBox {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.embedInner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.embedInner iframe {
+  width: 100% !important;
+  height: 100% !important;
+}

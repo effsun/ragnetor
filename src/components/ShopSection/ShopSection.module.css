@@ -1,0 +1,41 @@
+.section {
+  position: relative;
+  padding: 6rem 3rem;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: clamp(4rem, 14vw, 14rem);
+  letter-spacing: 0.05em;
+  color: rgba(232, 197, 58, 0.06);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-family: var(--font);
+}
+
+.content p {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  opacity: 0.4;
+  line-height: 2.5;
+}

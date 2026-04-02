@@ -1,0 +1,53 @@
+.section {
+  padding: 6rem 3rem;
+  text-align: center;
+  background: linear-gradient(to bottom, var(--bg), var(--bg-light));
+}
+
+.headline {
+  font-family: var(--font);
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  letter-spacing: 0.06em;
+  margin-bottom: 0;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(232, 197, 58, 0.6);
+  filter:
+    drop-shadow(0 0 3px var(--gold))
+    drop-shadow(0 0 8px rgba(232, 197, 58, 0.3));
+  transition:
+    filter 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.headline:hover {
+  filter:
+    drop-shadow(0 0 5px var(--gold))
+    drop-shadow(0 0 16px rgba(232, 197, 58, 0.45))
+    drop-shadow(0 0 25px rgba(232, 197, 58, 0.15));
+}
+
+.btn {
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  font-family: var(--font);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background: var(--gold);
+  color: var(--bg);
+  box-shadow: 0 0 30px var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}

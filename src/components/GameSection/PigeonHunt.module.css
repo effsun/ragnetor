@@ -1,0 +1,10 @@
+.canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: crosshair;
+  border: 1px solid rgba(232, 197, 58, 0.25);
+  box-shadow:
+    0 0 40px rgba(232, 197, 58, 0.08),
+    inset 0 0 60px rgba(0, 0, 0, 0.4);
+}
